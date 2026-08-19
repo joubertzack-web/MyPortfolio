@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Independent Systems Builder // Software Engineering</title>
-    <meta name="description" content="Portfolio of an independent software engineer focused on AI tooling, development environments, and systems software. Built on evidence and real-world implementation.">
+    <title>Zachary Joubert // Software Systems</title>
+    <meta name="description" content="Software systems, engineering experiments, and tools built by Zachary Joubert. Focused on practical problems, system architecture, AI tooling, and figuring out why software breaks.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="domain-aeowun">
@@ -58,14 +58,13 @@
             <h1>AEOWUN</h1>
 
             <p class="aeowun-lead">
-                An autonomous engineering runtime built to
-                <strong>understand, operate, and verify software projects</strong>
-                rather than simply generate code.
+                An autonomous software engineering runtime built to
+                <strong>work with real projects, keep track of what is happening, and verify the result.</strong>
             </p>
 
             <div class="hero-actions">
                 <a href="https://github.com/joubertzack-web/NETWORK" target="_blank" class="primary-action" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
-                    VIEW THE NETWORK
+                    VIEW PROJECT NETWORK
                 </a>
 
                 <button
@@ -100,20 +99,18 @@
                     </h2>
 
                     <p class="large-copy">
-                        Most AI development tools begin with a conversation and
-                        attempt to produce a useful answer.
+                        Most AI development tools start with a prompt and try to give you an answer.
                     </p>
 
                     <p>
-                        AEOWUN begins with the <strong>project itself</strong>.
-                        It maintains workspace state, coordinates tools,
-                        manages execution, evaluates results, and records
-                        evidence of what actually happened.
+                        AEOWUN starts with the <strong>software project itself</strong>.
+                        It keeps track of the workspace, controls the tools being used,
+                        manages the engineering loop, and checks what actually happened.
                     </p>
 
                     <p>
-                        The language model is not the system.
-                        It is one source of cognition inside the system.
+                        The AI isn't AEOWUN.
+                        It's a reasoning component that operates inside the runtime.
                     </p>
 
                     <div class="system-principles">
@@ -121,19 +118,19 @@
                         <div>
                             <span>01</span>
                             <strong>PROJECT STATE</strong>
-                            <p>Persistent awareness of the workspace and its current condition.</p>
+                            <p>The runtime keeps track of the project and what condition it is actually in.</p>
                         </div>
 
                         <div>
                             <span>02</span>
                             <strong>TOOL CONTROL</strong>
-                            <p>The runtime owns actions instead of blindly following model output.</p>
+                            <p>The runtime decides what actions can happen instead of blindly trusting model output.</p>
                         </div>
 
                         <div>
                             <span>03</span>
                             <strong>VERIFICATION</strong>
-                            <p>Execution results are checked against physical and logical evidence.</p>
+                            <p>A model saying something worked isn't proof. The system checks the result.</p>
                         </div>
 
                     </div>
@@ -157,9 +154,9 @@
                     </div>
 
                     <div class="identity-description">
-                        Persistent project state<br>
-                        Runtime-controlled execution<br>
-                        Evidence-backed outcomes
+                        Project state<br>
+                        Controlled execution<br>
+                        Verified results
                     </div>
 
                     <div class="identity-footer">
@@ -181,12 +178,12 @@
                 <div class="architecture-heading">
                     <div>
                         <span class="system-label">SYSTEM FLOW</span>
-                        <h3>How AEOWUN operates</h3>
+                        <h3>How AEOWUN works</h3>
                     </div>
 
                     <p>
-                        The model participates in the loop.
-                        The runtime owns the loop.
+                        The model reasons about the work.
+                        The runtime controls the work.
                     </p>
                 </div>
 
@@ -196,7 +193,7 @@
                     <div class="architecture-node entry-node">
                         <span class="node-index">01</span>
                         <strong>TASK</strong>
-                        <small>Intent enters the runtime.</small>
+                        <small>A task enters the runtime.</small>
                     </div>
 
                     <div class="architecture-connector"></div>
@@ -204,7 +201,7 @@
                     <div class="architecture-node">
                         <span class="node-index">02</span>
                         <strong>HOST RUNTIME</strong>
-                        <small>Workspace and execution state.</small>
+                        <small>Project, workspace, and execution state.</small>
                     </div>
 
                     <div class="architecture-connector"></div>
@@ -212,7 +209,7 @@
                     <div class="architecture-node">
                         <span class="node-index">03</span>
                         <strong>COGNITION</strong>
-                        <small>Reasoning provider evaluates state.</small>
+                        <small>A reasoning provider evaluates the current state.</small>
                     </div>
 
                     <div class="architecture-connector"></div>
@@ -220,7 +217,7 @@
                     <div class="architecture-node">
                         <span class="node-index">04</span>
                         <strong>ACTION</strong>
-                        <small>Tools perform controlled mutations.</small>
+                        <small>Tools make controlled changes to the project.</small>
                     </div>
 
                     <div class="architecture-connector"></div>
@@ -228,7 +225,7 @@
                     <div class="architecture-node">
                         <span class="node-index">05</span>
                         <strong>VERIFY</strong>
-                        <small>Results are independently evaluated.</small>
+                        <small>The runtime checks what actually happened.</small>
                     </div>
 
                     <div class="architecture-connector"></div>
@@ -236,7 +233,7 @@
                     <div class="architecture-node evidence-node">
                         <span class="node-index">06</span>
                         <strong>EVIDENCE</strong>
-                        <small>Observed state becomes project history.</small>
+                        <small>The result becomes part of the project's history.</small>
                     </div>
 
                 </div>
@@ -288,8 +285,9 @@
             <div class="secondary-heading">
                 <h2>Other Projects.</h2>
                 <p>
-                    These projects are part of the broader body of experimentation
-                    that led to AEOWUN.
+                    Different problems, same general approach:
+                    build something useful, break it, figure out why,
+                    and make the system better.
                 </p>
             </div>
 
@@ -307,10 +305,11 @@
                         </div>
 
                         <p>
-                            A programming environment designed to transfer
-                            existing programming knowledge into a new language
-                            instead of forcing a learner through material they
-                            already understand.
+                            A programming environment I started because I didn't want
+                            to relearn everything I already knew every time I picked up
+                            another language. It focuses on transferring existing
+                            programming concepts into a new language instead of
+                            starting from zero.
                         </p>
 
                         <div class="project-tags">
@@ -334,9 +333,11 @@
                         </div>
 
                         <p>
-                            A network monitoring and containment system
-                            experimenting with flow-based anomaly detection
-                            and automated device isolation.
+                            A local network monitoring and containment system.
+                            It started from wanting better visibility into what was
+                            actually happening on a network and grew into experiments
+                            with discovery, device identity, traffic observation,
+                            and automated containment.
                         </p>
 
                         <div class="project-tags">
@@ -360,9 +361,11 @@
                         </div>
 
                         <p>
-                            An interactive simulation exploring alchemical
-                            systems, systemic roleplay, and interconnected
-                            world-building mechanics.
+                            An experimental simulation built around alchemy,
+                            interconnected systems, and world-building.
+                            Less serious than the other projects, but still
+                            another excuse to build complicated systems and
+                            see what happens when they interact.
                         </p>
 
                         <div class="project-tags">
@@ -393,12 +396,12 @@
                 ENGINEERING
             </div>
 
-            <h2>Evidence over claims.</h2>
+            <h2>Build it. Break it. Figure out why.</h2>
 
             <p>
-                AEOWUN's architecture exists because software systems fail
-                in specific, observable ways. These are some of the mechanisms
-                built in response.
+                A lot of AEOWUN's architecture exists because something broke,
+                behaved differently than expected, or exposed a problem I hadn't
+                accounted for yet. These are some of the things I built because of it.
             </p>
 
         </section>
@@ -416,10 +419,10 @@
                 </div>
 
                 <p>
-                    Project evidence cannot be arbitrarily overwritten by
-                    whichever component happens to be running. Authority
-                    boundaries determine which actors can commit verified
-                    execution state.
+                    One of the problems I kept running into was letting too many
+                    parts of the system change important state. If everything can
+                    declare something true, eventually nothing actually means anything.
+                    AEOWUN therefore gives execution-critical state explicit authority.
                 </p>
 
                 <pre><code># ccb.py
@@ -446,9 +449,10 @@ if key.startswith(("truth:", "execution:")):
                 </div>
 
                 <p>
-                    Model output is not treated as proof that an operation
-                    succeeded. Filesystem state is observed before and after
-                    mutation so the runtime can establish what physically changed.
+                    One of the easiest mistakes an AI system can make is saying
+                    it did something when it didn't. AEOWUN doesn't treat a tool
+                    response or model response as proof. It checks the workspace
+                    and compares the resulting state.
                 </p>
 
                 <pre><code># shadow_fs.py
@@ -472,7 +476,7 @@ def get_hash(self):
 
             <div class="section-marker">
                 <span>04</span>
-                FAILURE HISTORY
+                THINGS THAT BROKE
             </div>
 
             <div class="incident-list">
@@ -484,10 +488,10 @@ def get_hash(self):
                     </div>
 
                     <p>
-                        The system repeatedly executed failed steps for an
-                        extended period. A validation watchdog was introduced
-                        to detect repetitive failure and force termination
-                        instead of allowing an uncontrolled reasoning loop.
+                        At one point the system could keep trying the same failed
+                        approach over and over. That isn't useful autonomy. It's
+                        just a loop. I added mechanisms to recognize repetitive
+                        failure and stop it instead of letting it run indefinitely.
                     </p>
                 </article>
 
@@ -499,10 +503,11 @@ def get_hash(self):
                     </div>
 
                     <p>
-                        Small models repeatedly failed deterministic tasks
-                        such as JSON manipulation and symbol lookup. Those
-                        responsibilities were moved into deterministic software
-                        logic and Tree-sitter analysis.
+                        I found that some things simply shouldn't be left to an LLM.
+                        JSON manipulation, symbol lookup, parsing, and similar tasks
+                        are better handled by software that gives the same answer
+                        every time. That led to moving more of this work into
+                        deterministic tooling and Tree-sitter.
                     </p>
                 </article>
 
@@ -514,10 +519,10 @@ def get_hash(self):
                     </div>
 
                     <p>
-                        Network containment required continuous verification
-                        rather than a one-time decision. Flow deltas are
-                        compared against active containment state to detect
-                        potential breaches.
+                        A network system can't make a decision once and assume
+                        everything stayed that way. AEGIS compares what the network
+                        is doing against the state it believes should exist so it
+                        can detect when reality changes.
                     </p>
                 </article>
 
@@ -537,15 +542,14 @@ def get_hash(self):
 
             <div class="section-marker">
                 <span>05</span>
-                THE BIO
+                ABOUT
             </div>
 
             <h2>Zachary Joubert</h2>
 
             <p>
-                Independent software developer building systems from practical
-                problems rather than following a conventional software
-                engineering path.
+                I build software because I keep running into problems that I want
+                better tools for. Most of the projects here started that way.
             </p>
 
         </section>
@@ -558,21 +562,24 @@ def get_hash(self):
                 <span class="system-label">ACTIVE NETWORK</span>
 
                 <div class="systems-hub-panel">
-                    <p>My primary projects are managed through a central engineering index that maintains the architecture and evidence for the entire ecosystem.</p>
+                    <p>
+                        These are the main systems I'm working on. They are separate
+                        projects, but a lot of the ideas and engineering work overlap.
+                    </p>
 
                     <div class="hub-item">
                         <strong>AEOWUN</strong>
-                        <p>Autonomous Engineering Runtime</p>
+                        <p>Autonomous Software Engineering Runtime</p>
                     </div>
 
                     <div class="hub-item">
                         <strong>LANGO</strong>
-                        <p>Language Transition Simulator</p>
+                        <p>Programming / Language Learning System</p>
                     </div>
 
                     <div class="hub-item">
                         <strong>AEGIS</strong>
-                        <p>Network Observatory & Defense</p>
+                        <p>Network Monitoring & Defense</p>
                     </div>
 
                     <a href="https://github.com/joubertzack-web/NETWORK" target="_blank" class="hub-link">
@@ -590,7 +597,7 @@ def get_hash(self):
                         <span>01</span>
                         <div>
                             <strong>Independent Systems Builder</strong>
-                            <small>Software Architecture & AI Tooling // Present</small>
+                            <small>Software, Systems & AI Tooling // Present</small>
                         </div>
                     </div>
 
@@ -613,7 +620,7 @@ def get_hash(self):
                     <div class="timeline-item">
                         <span>04</span>
                         <div>
-                            <strong>Robotics / Maintenance</strong>
+                            <strong>Warehouse / Maintenance</strong>
                             <small>Scoular Company</small>
                         </div>
                     </div>
@@ -629,14 +636,18 @@ def get_hash(self):
 
                 <p class="large-copy">
                     I learned by building things, breaking them,
-                    figuring out why they broke, and building them again.
+                    figuring out why they broke, and trying again.
                 </p>
 
                 <p>
                     I don't have a traditional computer-science background.
-                    Most of the software here started with a problem I wanted
-                    a tool to solve and existing software didn't handle the
-                    way I wanted.
+                    I learned most of this by actually building software and
+                    running into problems I didn't know how to solve yet.
+                </p>
+
+                <p>
+                    A lot of the software here started with a simple thought:
+                    <strong>there has to be a better way to do this.</strong>
                 </p>
 
                 <p>
@@ -667,8 +678,8 @@ def get_hash(self):
         <div class="footer-inner">
 
             <div class="mono footer-copy">
-                © 2026 Zachary Joubert. This is a GitHub Portfolio. //
-                ENGINEERING & ARCHITECTURE ARCHIVE
+                © 2026 Zachary Joubert. //
+                SOFTWARE, SYSTEMS & ENGINEERING
             </div>
 
             <div class="footer-links">
