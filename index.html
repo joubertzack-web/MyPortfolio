@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zachary Joubert // Software Systems</title>
-    <meta name="description" content="Software systems, engineering experiments, and tools built by Zachary Joubert. Focused on practical problems, system architecture, AI tooling, and figuring out why software breaks.">
+    <meta name="description" content="Software systems, engineering experiments, and tools built by Zachary Joubert. Focused on practical problems, system architecture, AI tooling, debugging, verification, and learning through implementation.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="domain-aeowun">
@@ -59,11 +59,15 @@
 
             <p class="aeowun-lead">
                 An autonomous software engineering runtime built to
-                <strong>work with real projects, keep track of what is happening, and verify the result.</strong>
+                <strong>work with real projects, keep track of what is happening,
+                act on the project, and verify the result.</strong>
             </p>
 
             <div class="hero-actions">
-                <a href="https://github.com/joubertzack-web/NETWORK" target="_blank" class="primary-action" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                <a href="https://github.com/joubertzack-web/NETWORK"
+                   target="_blank"
+                   class="primary-action"
+                   style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
                     VIEW PROJECT NETWORK
                 </a>
 
@@ -99,18 +103,31 @@
                     </h2>
 
                     <p class="large-copy">
-                        Most AI development tools start with a prompt and try to give you an answer.
+                        Most AI development tools start with a prompt and try to
+                        produce a useful answer.
                     </p>
 
                     <p>
                         AEOWUN starts with the <strong>software project itself</strong>.
-                        It keeps track of the workspace, controls the tools being used,
-                        manages the engineering loop, and checks what actually happened.
+                        The runtime keeps track of the workspace, project state,
+                        tools, execution, and what the system has actually learned
+                        from previous work.
                     </p>
 
                     <p>
-                        The AI isn't AEOWUN.
-                        It's a reasoning component that operates inside the runtime.
+                        A language model can reason about the work, but it does not
+                        get to define reality. The runtime decides what actions are
+                        allowed, what state is authoritative, and whether the result
+                        actually happened.
+                    </p>
+
+                    <p>
+                        That distinction came from actually building these systems.
+                        When something goes wrong, adding another prompt usually
+                        isn't the answer. Sometimes the missing piece is state.
+                        Sometimes it is tooling. Sometimes it is authority.
+                        Sometimes the model simply should not be responsible for
+                        the job in the first place.
                     </p>
 
                     <div class="system-principles">
@@ -118,19 +135,29 @@
                         <div>
                             <span>01</span>
                             <strong>PROJECT STATE</strong>
-                            <p>The runtime keeps track of the project and what condition it is actually in.</p>
+                            <p>
+                                The runtime keeps track of the project and what
+                                condition it is actually in instead of relying
+                                on the model to remember everything.
+                            </p>
                         </div>
 
                         <div>
                             <span>02</span>
                             <strong>TOOL CONTROL</strong>
-                            <p>The runtime decides what actions can happen instead of blindly trusting model output.</p>
+                            <p>
+                                The runtime controls what actions can happen and
+                                how those actions affect the project.
+                            </p>
                         </div>
 
                         <div>
                             <span>03</span>
                             <strong>VERIFICATION</strong>
-                            <p>A model saying something worked isn't proof. The system checks the result.</p>
+                            <p>
+                                A model saying something worked isn't proof.
+                                The resulting state has to be checked.
+                            </p>
                         </div>
 
                     </div>
@@ -271,6 +298,195 @@
 
             </div>
 
+
+            <!-- AEOWUN COMPONENTS -->
+            <div class="secondary-systems">
+
+                <div class="section-marker">
+                    <span>01A</span>
+                    RUNTIME COMPONENTS
+                </div>
+
+                <div class="secondary-heading">
+                    <h2>The pieces underneath it.</h2>
+                    <p>
+                        AEOWUN isn't one large model prompt. It is a collection
+                        of software components with different responsibilities.
+                        A major part of building it has been figuring out which
+                        responsibilities belong where.
+                    </p>
+                </div>
+
+
+                <div class="project-list">
+
+                    <article class="project-row">
+
+                        <div class="project-number">01</div>
+
+                        <div class="project-main">
+                            <div class="project-title">
+                                <h3>HOST RUNTIME</h3>
+                                <span class="project-status">CORE</span>
+                            </div>
+
+                            <p>
+                                Owns the engineering loop. Tasks enter here,
+                                workspaces are created and tracked here, workers
+                                operate through here, and state changes flow back
+                                through the runtime rather than being scattered
+                                across independent orchestration paths.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>ORCHESTRATION</span>
+                                <span>STATE</span>
+                                <span>EXECUTION</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-row">
+
+                        <div class="project-number">02</div>
+
+                        <div class="project-main">
+                            <div class="project-title">
+                                <h3>CAUSAL BLACKBOARD</h3>
+                                <span class="project-status">STATE</span>
+                            </div>
+
+                            <p>
+                                A shared state surface for execution-critical
+                                information. The important part isn't simply
+                                storing data. It is making it clear who is allowed
+                                to establish, change, or verify that data.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>AUTHORITY</span>
+                                <span>CAUSAL STATE</span>
+                                <span>PROVENANCE</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-row">
+
+                        <div class="project-number">03</div>
+
+                        <div class="project-main">
+                            <div class="project-title">
+                                <h3>SHADOWFS</h3>
+                                <span class="project-status">WORKSPACE</span>
+                            </div>
+
+                            <p>
+                                Keeps isolated filesystem state so the runtime can
+                                reason about changes without treating model intent
+                                as reality. The project can be inspected before,
+                                during, and after mutations.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>FILESYSTEM</span>
+                                <span>ISOLATION</span>
+                                <span>STATE TRACKING</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-row">
+
+                        <div class="project-number">04</div>
+
+                        <div class="project-main">
+                            <div class="project-title">
+                                <h3>FOREMAN</h3>
+                                <span class="project-status">CONTROL</span>
+                            </div>
+
+                            <p>
+                                Watches the engineering loop for behavior that
+                                looks like repeated failure rather than progress.
+                                Autonomy without a way to recognize that it is
+                                going nowhere is just an expensive infinite loop.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>LOOP CONTROL</span>
+                                <span>FAILURE DETECTION</span>
+                                <span>PROGRESS</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-row">
+
+                        <div class="project-number">05</div>
+
+                        <div class="project-main">
+                            <div class="project-title">
+                                <h3>STEEL THREAD ANALYZER</h3>
+                                <span class="project-status">ANALYSIS</span>
+                            </div>
+
+                            <p>
+                                Traces failures through the project instead of
+                                stopping at the first visible error. The goal is
+                                to find the part of the system that actually caused
+                                the problem rather than repeatedly fixing symptoms.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>FAILURE ANALYSIS</span>
+                                <span>TRACEABILITY</span>
+                                <span>ROOT CAUSE</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-row">
+
+                        <div class="project-number">06</div>
+
+                        <div class="project-main">
+                            <div class="project-title">
+                                <h3>VERIFICATION</h3>
+                                <span class="project-status">EVIDENCE</span>
+                            </div>
+
+                            <p>
+                                Separates "the system says it worked" from
+                                "the system can show that it worked." Verification
+                                is treated as its own responsibility instead of
+                                being another optimistic response from the same
+                                component that performed the operation.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>VALIDATION</span>
+                                <span>EVIDENCE</span>
+                                <span>TRUST BOUNDARIES</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
         </section>
 
 
@@ -285,9 +501,9 @@
             <div class="secondary-heading">
                 <h2>Other Projects.</h2>
                 <p>
-                    Different problems, same general approach:
-                    build something useful, break it, figure out why,
-                    and make the system better.
+                    Different problems, different environments, and a lot of
+                    experimentation. Most of these projects taught me something
+                    that eventually showed up somewhere else.
                 </p>
             </div>
 
@@ -301,15 +517,21 @@
                     <div class="project-main">
                         <div class="project-title">
                             <h3>LANG0</h3>
-                            <a href="https://github.com/joubertzack-web/NETWORK" target="_blank" class="project-status" style="text-decoration: none;">VIEW ON NETWORK</a>
+                            <a href="https://github.com/joubertzack-web/NETWORK"
+                               target="_blank"
+                               class="project-status"
+                               style="text-decoration: none;">
+                                VIEW ON NETWORK
+                            </a>
                         </div>
 
                         <p>
-                            A programming environment I started because I didn't want
-                            to relearn everything I already knew every time I picked up
-                            another language. It focuses on transferring existing
-                            programming concepts into a new language instead of
-                            starting from zero.
+                            A programming environment I started because I didn't
+                            want to relearn everything I already knew every time
+                            I picked up another language. The system is built
+                            around transferring concepts I already understand
+                            into a different language and identifying what I
+                            actually need to learn.
                         </p>
 
                         <div class="project-tags">
@@ -329,14 +551,20 @@
                     <div class="project-main">
                         <div class="project-title">
                             <h3>AEGIS</h3>
-                            <a href="https://github.com/joubertzack-web/NETWORK" target="_blank" class="project-status" style="text-decoration: none;">VIEW ON NETWORK</a>
+                            <a href="https://github.com/joubertzack-web/NETWORK"
+                               target="_blank"
+                               class="project-status"
+                               style="text-decoration: none;">
+                                VIEW ON NETWORK
+                            </a>
                         </div>
 
                         <p>
                             A local network monitoring and containment system.
-                            It started from wanting better visibility into what was
-                            actually happening on a network and grew into experiments
-                            with discovery, device identity, traffic observation,
+                            It started with wanting better visibility into what
+                            was actually happening on a network and grew into
+                            experiments with discovery, device identity,
+                            persistence, DNS policy, traffic observation,
                             and automated containment.
                         </p>
 
@@ -363,15 +591,45 @@
                         <p>
                             An experimental simulation built around alchemy,
                             interconnected systems, and world-building.
-                            Less serious than the other projects, but still
-                            another excuse to build complicated systems and
-                            see what happens when they interact.
+                            It is less serious than the other projects, but
+                            it is still another exercise in making independent
+                            systems interact and seeing what happens when they
+                            start producing consequences for one another.
                         </p>
 
                         <div class="project-tags">
                             <span>SIMULATION</span>
                             <span>SYSTEM DESIGN</span>
                             <span>WORLD BUILDING</span>
+                        </div>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">04</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>WRENGO</h3>
+                            <span class="project-status">SHOPOS</span>
+                        </div>
+
+                        <p>
+                            An industrial shop-management system built around
+                            actual shop workflow rather than a generic CRUD
+                            application. It deals with persistent work orders,
+                            vehicles, technicians, reactive state, and the
+                            practical problem of making software fit the way
+                            work actually happens.
+                        </p>
+
+                        <div class="project-tags">
+                            <span>ANDROID</span>
+                            <span>WORKFLOW</span>
+                            <span>DOMAIN SOFTWARE</span>
                         </div>
                     </div>
 
@@ -399,9 +657,18 @@
             <h2>Build it. Break it. Figure out why.</h2>
 
             <p>
-                A lot of AEOWUN's architecture exists because something broke,
+                A lot of the architecture here exists because something broke,
                 behaved differently than expected, or exposed a problem I hadn't
-                accounted for yet. These are some of the things I built because of it.
+                accounted for yet. I don't think failure is particularly
+                interesting by itself. Figuring out what the failure says about
+                the design is.
+            </p>
+
+            <p>
+                When something doesn't work, the goal isn't just to patch the
+                visible symptom. I want to understand what assumption was wrong,
+                what responsibility was in the wrong place, and what the system
+                needs to do differently next time.
             </p>
 
         </section>
@@ -420,9 +687,10 @@
 
                 <p>
                     One of the problems I kept running into was letting too many
-                    parts of the system change important state. If everything can
-                    declare something true, eventually nothing actually means anything.
-                    AEOWUN therefore gives execution-critical state explicit authority.
+                    parts of the system change important state. If everything
+                    can declare something true, eventually nothing actually
+                    means anything. AEOWUN therefore gives execution-critical
+                    state explicit authority.
                 </p>
 
                 <pre><code># ccb.py
@@ -469,6 +737,130 @@ def get_hash(self):
 
             </article>
 
+
+            <article class="evidence-card">
+
+                <span class="evidence-index">03</span>
+
+                <div class="evidence-title">
+                    <span>MODEL BOUNDARY</span>
+                    <h3>Don't Make the LLM Do Everything</h3>
+                </div>
+
+                <p>
+                    Some problems are reasoning problems. Some aren't.
+                    I found that pushing deterministic work into a language
+                    model created unnecessary failure modes. Parsing, symbol
+                    lookup, structured manipulation, and other repeatable work
+                    belongs in software when software can do it better.
+                </p>
+
+                <pre><code># deterministic work
+
+parse()
+index()
+validate()
+execute()
+verify()
+
+# model
+reason()</code></pre>
+
+            </article>
+
+
+            <article class="evidence-card">
+
+                <span class="evidence-index">04</span>
+
+                <div class="evidence-title">
+                    <span>STRUCTURAL ANALYSIS</span>
+                    <h3>Tree-sitter Instead of Guessing</h3>
+                </div>
+
+                <p>
+                    Once a project gets large enough, searching strings isn't
+                    enough. AEOWUN uses structural parsing so the runtime can
+                    reason about declarations, symbols, relationships, and
+                    source structure without pretending that source code is
+                    just text.
+                </p>
+
+                <pre><code># source structure
+
+SOURCE
+  └── AST
+       ├── SYMBOLS
+       ├── REFERENCES
+       ├── CALLS
+       └── RELATIONSHIPS</code></pre>
+
+            </article>
+
+
+            <article class="evidence-card">
+
+                <span class="evidence-index">05</span>
+
+                <div class="evidence-title">
+                    <span>FAILURE CONTROL</span>
+                    <h3>Stop Doing the Same Thing</h3>
+                </div>
+
+                <p>
+                    Autonomous behavior needs a definition of failure.
+                    Otherwise a system can continue taking technically valid
+                    actions while making no actual progress. AEOWUN watches
+                    for repeated failure patterns and treats lack of progress
+                    as a runtime problem.
+                </p>
+
+                <pre><code># conceptual loop
+
+observe()
+reason()
+act()
+verify()
+
+if no_progress:
+    intervene()</code></pre>
+
+            </article>
+
+
+            <article class="evidence-card">
+
+                <span class="evidence-index">06</span>
+
+                <div class="evidence-title">
+                    <span>ARCHITECTURE CORRECTION</span>
+                    <h3>Sometimes the Fix Is Removing Things</h3>
+                </div>
+
+                <p>
+                    A recurring lesson has been that adding another manager,
+                    another state machine, or another recovery mechanism can
+                    make a system worse. Some of the hardest engineering work
+                    has been consolidating duplicated responsibilities and
+                    deciding which component should actually own the work.
+                </p>
+
+                <pre><code># fewer authorities
+
+HOST RUNTIME
+      ↓
+WORKSPACE
+      ↓
+TOOLS
+      ↓
+EVIDENCE
+
+not:
+
+manager → manager → manager → ???</code></pre>
+
+            </article>
+
         </section>
 
 
@@ -490,8 +882,9 @@ def get_hash(self):
                     <p>
                         At one point the system could keep trying the same failed
                         approach over and over. That isn't useful autonomy. It's
-                        just a loop. I added mechanisms to recognize repetitive
-                        failure and stop it instead of letting it run indefinitely.
+                        just a loop. The answer wasn't another instruction telling
+                        the model to "try harder." The runtime needed a way to
+                        recognize repetitive failure and stop it.
                     </p>
                 </article>
 
@@ -503,11 +896,28 @@ def get_hash(self):
                     </div>
 
                     <p>
-                        I found that some things simply shouldn't be left to an LLM.
-                        JSON manipulation, symbol lookup, parsing, and similar tasks
-                        are better handled by software that gives the same answer
-                        every time. That led to moving more of this work into
-                        deterministic tooling and Tree-sitter.
+                        I found that some things simply shouldn't be left to an
+                        LLM. JSON manipulation, symbol lookup, parsing, and similar
+                        tasks are better handled by software that gives the same
+                        answer every time. That led to moving more of this work
+                        into deterministic tooling and Tree-sitter.
+                    </p>
+                </article>
+
+
+                <article>
+                    <div class="incident-heading">
+                        <span>ARCHITECTURAL DUPLICATION</span>
+                        <small>CONSOLIDATION / SIMPLIFICATION</small>
+                    </div>
+
+                    <p>
+                        More than once, a problem that looked like a missing
+                        feature turned out to be too many components trying to
+                        solve the same problem. Multiple orchestration paths,
+                        duplicated state, and indirect recovery logic made the
+                        system harder to reason about. The fix was consolidation,
+                        not another layer.
                     </p>
                 </article>
 
@@ -524,6 +934,149 @@ def get_hash(self):
                         is doing against the state it believes should exist so it
                         can detect when reality changes.
                     </p>
+                </article>
+
+
+                <article>
+                    <div class="incident-heading">
+                        <span>LEARNING THE MISSING PIECE</span>
+                        <small>IMPLEMENTATION / RESEARCH</small>
+                    </div>
+
+                    <p>
+                        When I hit something I don't understand, I don't want the
+                        system to hide that gap. I learn what I'm missing, test the
+                        idea in the implementation, and then decide whether the
+                        architecture actually needs it. That has led me into areas
+                        ranging from language parsing and runtime orchestration to
+                        networking, persistence, and verification.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <section class="container secondary-systems">
+
+            <div class="section-marker">
+                <span>04A</span>
+                ENGINEERING RULES
+            </div>
+
+            <div class="secondary-heading">
+                <h2>Things I keep learning.</h2>
+                <p>
+                    These aren't rules I wrote down before I started.
+                    Most of them came from building something the wrong way
+                    and eventually understanding why.
+                </p>
+            </div>
+
+            <div class="project-list">
+
+                <article class="project-row">
+
+                    <div class="project-number">01</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>STATE SHOULD HAVE AN OWNER</h3>
+                            <span class="project-status">LESSON</span>
+                        </div>
+
+                        <p>
+                            If multiple components believe they are authoritative,
+                            debugging becomes archaeology. State needs a clear
+                            owner and a clear path for changing it.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">02</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>TOOLS SHOULD DO WHAT SOFTWARE IS GOOD AT</h3>
+                            <span class="project-status">LESSON</span>
+                        </div>
+
+                        <p>
+                            If a deterministic function can solve a problem,
+                            there is usually little reason to make a probabilistic
+                            model solve it through language.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">03</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>FAILURE IS INFORMATION</h3>
+                            <span class="project-status">LESSON</span>
+                        </div>
+
+                        <p>
+                            A failure isn't automatically a reason to patch the
+                            line that crashed. It can expose a bad abstraction,
+                            misplaced responsibility, missing state, or an
+                            assumption that was never actually true.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">04</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>COMPLEXITY HAS TO EARN ITS KEEP</h3>
+                            <span class="project-status">LESSON</span>
+                        </div>
+
+                        <p>
+                            I have learned the hard way that another abstraction
+                            can make a system look more sophisticated while making
+                            it harder to understand. If a piece of architecture
+                            doesn't solve a real problem, it probably shouldn't
+                            exist yet.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">05</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>LEARN WHAT THE PROBLEM REQUIRES</h3>
+                            <span class="project-status">LESSON</span>
+                        </div>
+
+                        <p>
+                            I don't try to know everything before starting.
+                            I build until I hit the edge of what I understand,
+                            then I learn the part that is missing. The project
+                            is usually what tells me what I need to learn next.
+                        </p>
+                    </div>
+
                 </article>
 
             </div>
@@ -552,6 +1105,13 @@ def get_hash(self):
                 better tools for. Most of the projects here started that way.
             </p>
 
+            <p>
+                I don't really have a single category for what I do. I end up
+                moving between software architecture, AI systems, networking,
+                programming tools, simulations, and whatever else the problem
+                requires.
+            </p>
+
         </section>
 
 
@@ -565,6 +1125,8 @@ def get_hash(self):
                     <p>
                         These are the main systems I'm working on. They are separate
                         projects, but a lot of the ideas and engineering work overlap.
+                        Problems found in one project often change how I approach
+                        another.
                     </p>
 
                     <div class="hub-item">
@@ -573,7 +1135,7 @@ def get_hash(self):
                     </div>
 
                     <div class="hub-item">
-                        <strong>LANGO</strong>
+                        <strong>LANG0</strong>
                         <p>Programming / Language Learning System</p>
                     </div>
 
@@ -582,7 +1144,14 @@ def get_hash(self):
                         <p>Network Monitoring & Defense</p>
                     </div>
 
-                    <a href="https://github.com/joubertzack-web/NETWORK" target="_blank" class="hub-link">
+                    <div class="hub-item">
+                        <strong>WRENGO</strong>
+                        <p>Industrial Shop Workflow</p>
+                    </div>
+
+                    <a href="https://github.com/joubertzack-web/NETWORK"
+                       target="_blank"
+                       class="hub-link">
                         ACCESS THE NETWORK HUB →
                     </a>
                 </div>
@@ -646,8 +1215,23 @@ def get_hash(self):
                 </p>
 
                 <p>
+                    When I don't know something, I learn it because the project
+                    needs it. That has meant learning different languages,
+                    frameworks, parsing techniques, networking concepts,
+                    databases, operating-system behavior, software architecture,
+                    and a lot of things I didn't originally set out to learn.
+                </p>
+
+                <p>
                     A lot of the software here started with a simple thought:
                     <strong>there has to be a better way to do this.</strong>
+                </p>
+
+                <p>
+                    I don't think being self-taught means I don't have anything
+                    left to learn. It's basically the opposite. I am used to
+                    finding the part I don't understand and going after it until
+                    I do.
                 </p>
 
                 <p>
@@ -661,6 +1245,131 @@ def get_hash(self):
                         target="_blank">
                     VIEW RESUME.PDF
                 </a>
+
+            </div>
+
+        </section>
+
+
+        <section class="container secondary-systems">
+
+            <div class="section-marker">
+                <span>06</span>
+                HOW I WORK
+            </div>
+
+            <div class="secondary-heading">
+                <h2>Start with the problem.</h2>
+                <p>
+                    I don't usually start with a technology and then look for
+                    something to use it for. I start with something that isn't
+                    working the way I want and build toward a solution.
+                </p>
+            </div>
+
+            <div class="project-list">
+
+                <article class="project-row">
+
+                    <div class="project-number">01</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>FIND THE ACTUAL PROBLEM</h3>
+                            <span class="project-status">APPROACH</span>
+                        </div>
+
+                        <p>
+                            The first visible problem isn't always the real one.
+                            I try to understand what the system is actually doing
+                            before deciding what needs to change.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">02</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>BUILD A WORKING PIECE</h3>
+                            <span class="project-status">APPROACH</span>
+                        </div>
+
+                        <p>
+                            I learn a lot faster when there is something real
+                            in front of me. I would rather build a rough working
+                            implementation and discover its problems than spend
+                            months designing something I haven't tested against
+                            reality.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">03</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>BREAK IT</h3>
+                            <span class="project-status">APPROACH</span>
+                        </div>
+
+                        <p>
+                            Once something works, I want to know where it stops
+                            working. Failures, edge cases, bad assumptions,
+                            performance problems, and unexpected behavior are
+                            usually where the useful information is.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">04</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>LEARN WHAT I MISSED</h3>
+                            <span class="project-status">APPROACH</span>
+                        </div>
+
+                        <p>
+                            If the problem exposes something I don't understand,
+                            that becomes the next thing to learn. I don't see
+                            that as a detour. It is part of building the system.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="project-row">
+
+                    <div class="project-number">05</div>
+
+                    <div class="project-main">
+                        <div class="project-title">
+                            <h3>FIX THE DESIGN, NOT JUST THE SYMPTOM</h3>
+                            <span class="project-status">APPROACH</span>
+                        </div>
+
+                        <p>
+                            A patch that makes an error disappear isn't necessarily
+                            a fix. If the failure came from the architecture,
+                            eventually the architecture has to change.
+                        </p>
+                    </div>
+
+                </article>
 
             </div>
 
